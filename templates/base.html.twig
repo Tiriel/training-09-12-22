@@ -1,3 +1,4 @@
+{#{% set footer = 'Je ne suis pas un footer.' %}#}
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,6 +15,15 @@
         {% endblock %}
     </head>
     <body>
+        <header>
+        {% block navbar %}
+            {{ include('includes/_navbar.html.twig', {}, with_context = false) }}
+        {% endblock %}
+        </header>
+        <main>
         {% block body %}{% endblock %}
+        </main>
+        {{ render(controller('App\\Controller\\MovieController::decades', {'max': 5})) }}
+{#    {{ include('includes/_footer.html.twig', {footer: 'Je suis un footer.'}, with_context = false) }}#}
     </body>
 </html>
