@@ -18,4 +18,5 @@ $(document).ready(function () {
         console.log('clicked!');
     })
 });
+
 global.$ = global.jQuery = $;

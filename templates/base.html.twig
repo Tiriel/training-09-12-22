@@ -20,7 +20,7 @@
             {{ include('includes/_navbar.html.twig', {}, with_context = false) }}
         {% endblock %}
         </header>
-        <main>
+        <main class="container mt-5">
         {% block body %}{% endblock %}
         </main>
         {{ render(controller('App\\Controller\\MovieController::decades', {'max': 5})) }}
