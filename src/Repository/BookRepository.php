@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Book;
+use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -38,6 +39,22 @@ class BookRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    //public function getFoo(string $title)
+    //{
+    //    $qb = $this->createQueryBuilder('b');
+    //    $qb->innerJoin(Comment::class, 'c')
+    //        ->where($qb->expr()->orX(
+    //            $qb->expr()->like('title', $qb->expr()->literal('%:title%')),
+    //            $qb->expr()->andX(
+    //                $qb->expr()->lte('b.releasedAt', new \DateTimeImmutable('1885-01-01')),
+    //                $qb->expr()->eq('c.author', 'Babar')
+    //            )
+    //        ))
+    //        ->setParameter('title', $title, \PDO::PARAM_STR)
+    //        ->getQuery()
+    //        ->getResult();
+    //}
 
 //    /**
 //     * @return Book[] Returns an array of Book objects
