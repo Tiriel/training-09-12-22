@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block aside %}
+        Some aside
+{% endblock %}
+
+{% block decades %}
+        {{ render(controller('App\\Controller\\MovieController::decades')) }}
+{% endblock %}

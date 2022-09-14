@@ -15,10 +15,10 @@ class MovieController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(): Response
+    public function index(MovieRepository $repository): Response
     {
         return $this->render('movie/index.html.twig', [
-            'controller_name' => 'MovieController',
+            'movies' => $repository->findAll(),
         ]);
     }
 
@@ -34,10 +34,9 @@ class MovieController extends AbstractController
         ]);
     }
 
-    public function decades(int $max)
+    public function decades(MovieRepository $repository)
     {
-        $decades = [];
-        // $decades = ... chercher en bdd
+        $decades = $repository->getDecades();
 
         return $this->render('includes/_decades.html.twig', [
             'decades' => $decades

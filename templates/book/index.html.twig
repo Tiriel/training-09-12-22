@@ -1,15 +1,27 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}Hello BookController!{% endblock %}
+{% block title %}Available Books{% endblock %}
 
 {% block body %}
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="example-wrapper">
+        <h1>Available books</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/benjamin/Dev/sl/formations/training-09-12-22/src/Controller/BookController.php'|file_link(0) }}">src/Controller/BookController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/benjamin/Dev/sl/formations/training-09-12-22/templates/book/index.html.twig'|file_link(0) }}">templates/book/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <section class="row row-cols-3 mt-5">
+            {% for book in books %}
+                <div class="col">
+                    <a href="{{ path('app_book_details', {'id': book.id}) }}">
+                        <div class="card w-75">
+                            <div class="card-body">
+                                <h2 class="card-title">{{ book.title }}</h2>
+                                <p class="card-text">Author: {{ book.author }}</p>
+                                <p class="card-text">Release date: {{ book.releasedAt|date('Y/m/d') }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% else %}
+                <p>No books in database yet...</p>
+            {% endfor %}
+        </section>
+    </div>
 {% endblock %}

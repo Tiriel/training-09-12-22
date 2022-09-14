@@ -1,13 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}Movie : {{ movie is not null ? movie.title : 'Not found.' }}{% endblock %}
 
 {% block body %}
 <div class="example-wrapper">
     {% if movie is not null %}
-    <h1>Movie : {{ movie.title }}</h1>
+    <h1 class="pb-5">Movie : {{ movie.title }}</h1>
 
-    <ul>
+        <img src="{{ movie.poster }}" alt="{{ movie.title }} poster" class="float-end w-50">
+    <ul class="mt-5">
         <li>Id: {{ movie.id }}</li>
         <li>Title: {{ movie.title }}</li>
         <li>Released At: {{ movie.releasedAt|date('Y M d') }}</li>

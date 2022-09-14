@@ -20,10 +20,19 @@
             {{ include('includes/_navbar.html.twig', {}, with_context = false) }}
         {% endblock %}
         </header>
-        <main class="container mt-5">
-        {% block body %}{% endblock %}
+        <main class="container-fluid mt-5">
+            <div class="row">
+                <aside class="col-1">
+                    {% block aside %}{% endblock %}
+                </aside>
+                <section class="col-10">
+                    {% block body %}{% endblock %}
+               </section>
+                <aside class="col-1">
+                    {% block decades %}{% endblock %}
+                </aside>
+            </div>
         </main>
-        {{ render(controller('App\\Controller\\MovieController::decades', {'max': 5})) }}
 {#    {{ include('includes/_footer.html.twig', {footer: 'Je suis un footer.'}, with_context = false) }}#}
     </body>
 </html>

@@ -1,6 +1,8 @@
-<ul>Decades :</ul>
+<h3>Decades :</h3>
+<ul class="nav flex-column">
 {% for decade in decades %}
-    <li>{{ decade }}</li>
+    <li class="nav-item">{{ decade.year }}</li>
     {% else %}
     <li>No decades yet.</li>
 {% endfor %}
+</ul>

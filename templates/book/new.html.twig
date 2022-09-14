@@ -1,0 +1,27 @@
+{% extends 'layout.html.twig' %}
+{#{% form_theme book_form 'bootstrap_5_horizontal_layout.html.twig' %}#}
+
+{% block title 'New Book' %}
+
+{% block body %}
+    <h1>New Book</h1>
+
+    {{ form_start(book_form) }}
+{#        {{ form_widget(book_form) }}#}
+        {{ form_row(book_form.title) }}
+{#    <div>#}
+{#        {{ form_label(book_form.title) }}#}
+{#        {{ form_widget(book_form.title) }}#}
+{#        {{ form_errors(book_form.title) }}#}
+{#    </div>#}
+
+        {{ form_row(book_form.isbn) }}
+
+        {{ form_row(book_form.author) }}
+
+        {{ form_row(book_form.releasedAt) }}
+
+        {{ form_row(book_form.comments) }}
+        <button type="submit" class="btn btn-primary">Send</button>
+    {{ form_end(book_form) }}
+{% endblock %}
