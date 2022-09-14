@@ -12,7 +12,7 @@
         <li>Id: {{ movie.id }}</li>
         <li>Title: {{ movie.title }}</li>
         <li>Released At: {{ movie.releasedAt|date('Y M d') }}</li>
-{#        <li>Genres: {{ movie.genres|join(', ') }}</li>#}
+        <li>Genres: {{ movie.getGenreNames }}</li>
         <li>Price: {{ movie.price }}</li>
     </ul>
     {% else %}

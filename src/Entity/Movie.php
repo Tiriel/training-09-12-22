@@ -142,4 +142,11 @@ class Movie
 
         return $this;
     }
+
+    public function getGenreNames(): string
+    {
+        return array_reduce($this->genres->toArray(), function($carry, $genre) {
+            return $carry !== '' ? $carry . ', ' . $genre->getName() : $genre->getName();
+        }, '');
+    }
 }
