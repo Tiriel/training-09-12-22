@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use App\Consumer\OmdbApiConsumer;
+use App\Provider\MovieProvider;
 use App\Repository\MovieRepository;
-use App\Transformer\OmdbMovieTransformer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,10 +16,10 @@ class MovieController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(MovieRepository $repository, int $moviePerPage): Response
+    public function index(MovieRepository $repository): Response
     {
         return $this->render('movie/index.html.twig', [
-            'movies' => $repository->findBy([], [], $moviePerPage)
+            'movies' => $repository->findAll(),
         ]);
     }
 
@@ -37,12 +36,12 @@ class MovieController extends AbstractController
     }
 
     /**
-     * @Route("/omdb/{title<[a-zA-z0-9- ]+>}", name="details_title")
+     * @Route("/omdb/{title<[a-zA-z0-9- ]+>}", name="omdb")
      */
-    public function detailsByTitle(string $title, OmdbApiConsumer $consumer, OmdbMovieTransformer $transformer): Response
+    public function omdb(string $title, MovieProvider $provider): Response
     {
         return $this->render('movie/details.html.twig', [
-            'movie' => $transformer->transform($consumer->getMovie(OmdbApiConsumer::MODE_TITLE, $title))
+            'movie' => $provider->getMovieByTitle($title),
         ]);
     }
 

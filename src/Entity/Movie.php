@@ -45,7 +45,7 @@ class Movie
     private $price;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Genre::class)
+     * @ORM\ManyToMany(targetEntity=Genre::class, cascade={"persist"})
      */
     private $genres;
 
