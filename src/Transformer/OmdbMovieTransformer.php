@@ -27,6 +27,8 @@ class OmdbMovieTransformer implements DataTransformerInterface
             ->setPoster($value['Poster'])
             ->setReleasedAt(new \DateTimeImmutable($date))
             ->setPrice(5.0)
+            ->setImdbId($value['imdbID'])
+            ->setRated($value['Rated'])
             ;
 
         foreach ($genreNames as $genreName) {

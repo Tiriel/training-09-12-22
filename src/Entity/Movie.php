@@ -49,6 +49,16 @@ class Movie
      */
     private $genres;
 
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $imdbId;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $rated;
+
     public function __construct()
     {
         $this->genres = new ArrayCollection();
@@ -148,5 +158,29 @@ class Movie
         return array_reduce($this->genres->toArray(), function($carry, $genre) {
             return $carry !== '' ? $carry . ', ' . $genre->getName() : $genre->getName();
         }, '');
+    }
+
+    public function getImdbId(): ?string
+    {
+        return $this->imdbId;
+    }
+
+    public function setImdbId(string $imdbId): self
+    {
+        $this->imdbId = $imdbId;
+
+        return $this;
+    }
+
+    public function getRated(): ?string
+    {
+        return $this->rated;
+    }
+
+    public function setRated(string $rated): self
+    {
+        $this->rated = $rated;
+
+        return $this;
     }
 }

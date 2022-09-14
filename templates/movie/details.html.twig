@@ -13,6 +13,8 @@
         <li>Title: {{ movie.title }}</li>
         <li>Released At: {{ movie.releasedAt|date('Y M d') }}</li>
         <li>Genres: {{ movie.getGenreNames }}</li>
+        <li>Rated: {{ movie.rated }}</li>
+        <li>IMDb ID: {{ movie.imdbId }}</li>
         <li>Price: {{ movie.price }}</li>
     </ul>
     {% else %}
