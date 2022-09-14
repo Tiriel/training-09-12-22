@@ -17,10 +17,10 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(MovieRepository $repository): Response
+    public function index(MovieRepository $repository, int $moviePerPage): Response
     {
         return $this->render('default/index.html.twig', [
-            'movies' => $repository->findBy([], ['id' => 'DESC'], 6)
+            'movies' => $repository->findBy([], ['id' => 'DESC'], $moviePerPage)
         ]);
     }
 
