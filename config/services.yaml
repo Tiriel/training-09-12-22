@@ -34,3 +34,7 @@ services:
     App\Notifier\Factory\ChainNotificationFactory:
         arguments:
             $factories: !tagged_iterator app.notifier.notification_factory
+
+    App\Security\Voter\BookVoter:
+        tags:
+            - {name: security.voter, priority: 10}

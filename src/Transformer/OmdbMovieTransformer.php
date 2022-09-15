@@ -16,6 +16,11 @@ class OmdbMovieTransformer implements DataTransformerInterface
         $this->genreRepository = $genreRepository;
     }
 
+    /**
+     * @param $value
+     * @return Movie|mixed
+     * @throws \Exception
+     */
     public function transform($value)
     {
         $date = $value['Released'] === 'N/A' ? $value['Year'] : $value['Released'];
@@ -39,6 +44,10 @@ class OmdbMovieTransformer implements DataTransformerInterface
         return $movie;
     }
 
+    /**
+     * @param $value
+     * @return mixed
+     */
     public function reverseTransform($value)
     {
         throw new \LogicException('Not implemented.');
