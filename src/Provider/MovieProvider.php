@@ -7,6 +7,7 @@ use App\Entity\Movie;
 use App\Repository\MovieRepository;
 use App\Transformer\OmdbMovieTransformer;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Security\Core\Security;
 
 class MovieProvider
 {
@@ -14,12 +15,14 @@ class MovieProvider
     private OmdbMovieTransformer $transformer;
     private MovieRepository $repository;
     private ?SymfonyStyle $io = null;
+    private Security $security;
 
-    public function __construct(OmdbApiConsumer $consumer, OmdbMovieTransformer $transformer, MovieRepository $repository)
+    public function __construct(OmdbApiConsumer $consumer, OmdbMovieTransformer $transformer, MovieRepository $repository, Security $security)
     {
         $this->consumer = $consumer;
         $this->transformer = $transformer;
         $this->repository = $repository;
+        $this->security = $security;
     }
 
     public function getMovieByTitle(string $title): Movie
@@ -50,6 +53,7 @@ class MovieProvider
         }
 
         $this->sendIo('text', "Movie found on OMDb API. Adding in database.");
+        $movie->setAddedBy($this->security->getUser());
         $this->repository->add($movie, true);
 
         return $movie;

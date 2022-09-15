@@ -40,12 +40,14 @@ class BookController extends AbstractController
      */
     public function new(Request $request, BookRepository $repository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $book = new Book();
         $form = $this->createForm(BookType::class, $book);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             dump($book);
+            $book->setAddedBy($this->getUser());
             $repository->add($book, true);
 
             return $this->redirectToRoute('app_book_index');

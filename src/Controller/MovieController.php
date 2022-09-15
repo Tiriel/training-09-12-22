@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Provider\MovieProvider;
 use App\Repository\MovieRepository;
+use App\Security\Voter\MovieVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,6 +30,7 @@ class MovieController extends AbstractController
     public function details(MovieRepository $repository, int $id = 1): Response
     {
         $movie = $repository->find($id);
+        $this->denyAccessUnlessGranted(MovieVoter::VIEW, $movie);
 
         return $this->render('movie/details.html.twig', [
             'movie' => $movie,
@@ -40,8 +42,11 @@ class MovieController extends AbstractController
      */
     public function omdb(string $title, MovieProvider $provider): Response
     {
+        $movie = $provider->getMovieByTitle($title);
+        $this->denyAccessUnlessGranted(MovieVoter::VIEW, $movie);
+
         return $this->render('movie/details.html.twig', [
-            'movie' => $provider->getMovieByTitle($title),
+            'movie' => $movie,
         ]);
     }
 

@@ -59,6 +59,11 @@ class Movie
      */
     private $rated;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     */
+    private $addedBy;
+
     public function __construct()
     {
         $this->genres = new ArrayCollection();
@@ -180,6 +185,18 @@ class Movie
     public function setRated(string $rated): self
     {
         $this->rated = $rated;
+
+        return $this;
+    }
+
+    public function getAddedBy(): ?User
+    {
+        return $this->addedBy;
+    }
+
+    public function setAddedBy(?User $addedBy): self
+    {
+        $this->addedBy = $addedBy;
 
         return $this;
     }
